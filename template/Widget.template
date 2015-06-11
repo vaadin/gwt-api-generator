@@ -2,7 +2,9 @@
 package <%= ns %>.client.widget;
 
 import <%= ns %>.client.element.*;
+<% if (hasEvents()) { %>
 import <%= ns %>.client.widget.event.*;
+<% } %>
 import com.vaadin.components.gwt.polymer.client.PolymerWidget;
 import com.vaadin.components.gwt.polymer.client.webapi.*;
 import com.google.gwt.core.client.JsArray;
@@ -54,7 +56,7 @@ public class <%= className() %> extends <%= baseWidgetName() %> {
 
 <% if (hasAttributes()) _.forEach(attributes, function(attribute){ %>
     /**
-     * <%= getDescription('     ', atribute) %>
+     * <%= getDescription('     ', attribute) %>
      *
      * JavaScript Info:
      * @attribute <%= attribute.name %>

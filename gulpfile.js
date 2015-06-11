@@ -144,9 +144,9 @@ gulp.task('generate:imports-map', ['parse'], function() {
 gulp.task('generate:elements', ['parse'], function() {
   return StreamFromArray(global.parsed,{objectMode: true})
    .on('data', function(item) {
-     console.log("Data: ", item.is, item.type)
-     var e = item.type == 'behavior'? '' : 'Element';
-     parseTemplate('Element', item, item.is, 'element/', e + '.java');
+     if (!helpers.isBehavior(item)) {
+       parseTemplate('Element', item, item.is, 'element/', 'Element.java');
+     }
    })
 });
 

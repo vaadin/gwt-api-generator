@@ -14,10 +14,6 @@ import com.google.gwt.core.client.JavaScriptObject;
  * <%= getDescription(' ') %>
  */
 public class <%= className() %> extends <%= baseWidgetName() %> {
-	/**
-	 * AUTO-GENERATED CODE, DO NOT EDIT !!!
-	 */
-
     /**
      * Default Constructor.
      */
@@ -60,6 +56,7 @@ public class <%= className() %> extends <%= baseWidgetName() %> {
     /**
      * <%= getDescription('     ', atribute) %>
      *
+     * JavaScript Info:
      * @attribute <%= attribute.name %>
      * @type <%= attribute.type %>
      */
@@ -77,6 +74,7 @@ public class <%= className() %> extends <%= baseWidgetName() %> {
     /**
      * <%= getDescription('     ', item) %>
      *
+     * JavaScript Info:
      * @property <%= item.name %>
      * @type <%= item.type %>
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
@@ -91,6 +89,7 @@ public class <%= className() %> extends <%= baseWidgetName() %> {
     /**
      * <%= getDescription('     ', item) %>
      *
+     * JavaScript Info:
      * @method <%= item.name %><% if (!!item.params) _.forEach(item.params, function(param) { %>
      * @param {<%= param.type %>} <%= param.name %> <%= param.description %> <% }); %>
      * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
@@ -103,6 +102,9 @@ public class <%= className() %> extends <%= baseWidgetName() %> {
 <% if (hasEvents()) _.forEach(events, function(event){ %>
     /**
      * <%= getDescription('     ', event) %>
+     *
+     * JavaScript Info:
+     * @event <%= event.name %>     
      */
     public HandlerRegistration add<%= camelCase(event.name) %>Handler(<%= camelCase(event.name) %>EventHandler handler) {
         return addHandler(handler, <%= camelCase(event.name) %>Event.TYPE);

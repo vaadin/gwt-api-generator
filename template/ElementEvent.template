@@ -11,9 +11,6 @@ import com.google.gwt.core.client.js.JsType;
  */
 @JsType
 public interface <%= camelCase(name) %>Event extends Event {
-	/**
-	 * AUTO-GENERATED CODE, DO NOT EDIT !!!
-	 */
 
     static final String NAME = "<%= computeName(name) %>";
 <% if (hasParams()) { %>

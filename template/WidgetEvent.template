@@ -8,9 +8,6 @@ import com.google.gwt.core.client.JavaScriptObject;
  * <%= getDescription(' ') %>
  */
 public class <%= camelCase(name) %>Event extends GwtEvent<<%= camelCase(name) %>EventHandler> {
-	/**
-	 * AUTO-GENERATED CODE, DO NOT EDIT !!!
-	 */
 
     public static Type<<%= camelCase(name) %>EventHandler> TYPE = new Type<<%= camelCase(name) %>EventHandler>();
 

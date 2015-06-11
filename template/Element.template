@@ -11,10 +11,7 @@ import com.google.gwt.core.client.js.JsType;
  * <%= getDescription(' ') %>
  */
 @JsType
-public interface <%= elementClassName() %> <%= baseClassName() %> {
-    /**
-     * AUTO-GENERATED CODE, DO NOT EDIT !!!
-     */
+public interface <%= elementClassName() %> extends HTMLElement {
 
     public static final String TAG = "<%= name %>";
     public static final String SRC = "<%= path %>";
@@ -23,27 +20,40 @@ public interface <%= elementClassName() %> <%= baseClassName() %> {
     /**
      * <%= getDescription('     ', atribute) %>
      *
+     * JavaScript Info:
      * @attribute <%= attribute.name %>
      * @type <%= attribute.type %>
      */
     @JsProperty <%= computeType(attribute.type) %> <%= computeGetterWithPrefix(attribute) %>();
     @JsProperty void <%= computeSetterWithPrefix(attribute) %>(<%= computeType(attribute.type) %> value);
 <% }); %>
-<% if (hasProperties()) _.forEach(properties, function(item){ if (isBehavior() || !item.isBehavior) if (item.type != 'Function') { %>
+<% if (hasProperties()) _.forEach(properties, function(item){ if (item.type != 'Function') { %>
     /**
      * <%= getDescription('     ', item) %>
      *
+     * JavaScript Info:
      * @property <%= item.name %>
      * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
      */
     @JsProperty <%= computeType(item.type) %> <%= computeGetterWithPrefix(item) %>();
+    /**
+     * <%= getDescription('     ', item) %>
+     *
+     * JavaScript Info:
+     * @property <%= item.name %>
+     * @type <%= item.type %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
+     */
     @JsProperty void <%= computeSetterWithPrefix(item) %>(<%= computeType(item.type) %> value);
   <% } else { %>
     /**
      * <%= getDescription('     ', item) %>
      *
+     * JavaScript Info:
      * @method <%= item.name %><% if (!!item.params) _.forEach(item.params, function(param) { %>
      * @param {<%= param.type %>} <%= param.name %> <%= param.description %> <% }); %>
+     * <%= item.isBehavior ? ('@behavior ' + item.behavior ) : ''%>
      */
     void <%= item.name %>(<%= typedParamsString(item) %>);
 <% }}); %>

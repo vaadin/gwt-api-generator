@@ -85,17 +85,20 @@ module.exports = {
       }
     }
   },
+  hasItems: function(array) {
+    return array == true;
+  },
   hasEvents: function() {
-    return !!this.events;
+    return this.hasItems(this.events);
   },
   hasAttributes: function() {
-    return !!this.attributes;
+    return this.hasItems(this.attributes);
   },
   hasProperties: function() {
-    return !!this.properties;
+    return this.hasItems(this.properties);
   },
   hasParams: function() {
-    return !!this.params;
+    return this.hasItem(this.params);
   },
   capitalizeFirstLetter: function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

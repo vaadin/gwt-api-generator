@@ -68,11 +68,14 @@ gulp.task('bower:install', ['clean'], function() {
     }));
 });
 
-function getBehaviorPropertiesRecursively(item, name) {
+function getNestedBehaviors(item, name) {
   var properties = [];
+  var events = [];
 
   var behavior = helpers.findBehavior(name)
   if (behavior) {
+    events = behavior.events;
+
     behavior.properties.forEach(function(prop) {
       prop.isBehavior = true;
       prop.behavior = helpers.className(item.is);
@@ -81,19 +84,24 @@ function getBehaviorPropertiesRecursively(item, name) {
 
     if(behavior.behaviors) {
       behavior.behaviors.forEach(function(b) {
-        properties = _.union(properties, getBehaviorPropertiesRecursively(item,b));
+        var nestedBehaviors = getNestedBehaviors(item, b);
+        properties = _.union(properties, nestedBehaviors.properties);
+        events = _.union(events, nestedBehaviors.events);
       });
     }
   }
 
-  return properties;
+  return {properties: properties, events: events};
 }
 
 gulp.task('parse', ['analyze'], function(cb) {
   global.parsed.forEach(function(item) {
     if (!helpers.isBehavior(item) && item.behaviors && item.behaviors.length) {
+
       item.behaviors.forEach(function(name) {
-        item.properties = _.union(item.properties, getBehaviorPropertiesRecursively(item, name));
+        var nestedBehaviors = getNestedBehaviors(item, name);
+        item.properties = _.union(item.properties, nestedBehaviors.properties);
+        item.events = _.union(item.events, nestedBehaviors.events);
       });
     }
     // Hydrolysis duplicates attributes

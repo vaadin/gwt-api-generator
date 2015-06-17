@@ -14,10 +14,12 @@ var rename = require("gulp-rename");
 var marked = require('marked');
 
 var currentDir = process.cwd() + '/';
+var libDir = __dirname + '/lib/';
+var tplDir = __dirname + '/template/';
 
-var helpers = require(currentDir + "template/helpers");
-var custom = require(currentDir + "template/custom");
-require('require-dir')(currentDir + 'template/tasks/');
+var helpers = require(tplDir + "helpers");
+var custom = require(tplDir + "custom");
+require('require-dir')(tplDir + 'tasks');
 
 var clientDirBase = currentDir + (args.javaDir || 'src/main/java/').replace(/,+$/, "");
 var publicDirBase = currentDir + (args.resourcesDir || 'src/main/resources/').replace(/,+$/, "");
@@ -26,8 +28,6 @@ var artifactId = args.artifactId || "elements";
 
 var clientDir = clientDirBase + '/' + ns.replace(/\./g,'/') + "/";
 var publicDir = publicDirBase + '/' + ns.replace(/\./g,'/') + "/public/";
-var libDir = __dirname + '/lib/';
-var tplDir = __dirname + '/template/';
 var bowerDir = publicDir + "bower_components/";
 
 var bowerPackages = (args.package || 'PolymerElements/paper-elements').split(/[, ]+/);

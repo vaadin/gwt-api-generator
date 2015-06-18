@@ -61,6 +61,8 @@ gulp.task('parse', ['analyze'], function(cb) {
 
 gulp.task('analyze', ['clean:target', 'pre-analyze'], function() {
   return gulp.src([globalVar.bowerDir + "*/*.html",
+    // vaadin components
+    globalVar.bowerDir + "*/vaadin-*/vaadin-*.html",
     // ignore all demo.html, index.html and metadata.html files
     "!" + globalVar.bowerDir + "*/*demo.html",
     "!" + globalVar.bowerDir + "*/*index.html",

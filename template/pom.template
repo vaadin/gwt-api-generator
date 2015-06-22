@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId><%= groupId %></groupId>
+  <groupId><%= ns %></groupId>
   <artifactId><%= artifactId %></artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version><%= version %></version>
 
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <additionalparam>-Xdoclint:none</additionalparam>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <gwtVersion>2.8.0-SNAPSHOT</gwtVersion>
   </properties>
 
   <distributionManagement>
@@ -25,7 +24,7 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>${gwtVersion}</version>
+      <version>2.7.0</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -63,7 +62,7 @@
                 </goals>
             </execution>
         </executions>
-      <plugin>
+      </plugin>
     </plugins>
   </build>
 

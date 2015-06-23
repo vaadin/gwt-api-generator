@@ -202,8 +202,11 @@ gulp.task('copy:lib', function() {
 
 gulp.task('copy:pom', function() {
   var tpl = _.template(fs.readFileSync(tplDir + "pom.template"));
-  fs.ensureFileSync(globalVar.currentDir + "pom.xml");
-  fs.writeFileSync(globalVar.currentDir + "pom.xml", new Buffer(tpl(_.merge({}, null, globalVar, helpers))));
+  var pom = globalVar.currentDir + "pom.xml";
+  var parent = globalVar.currentDir + "pom-parent.xml"
+  globalVar.hasPomParent = fs.existsSync(baseFile);
+  fs.ensureFileSync(pom);
+  fs.writeFileSync(pom, new Buffer(tpl(_.merge({}, null, globalVar, helpers))));
 });
 
 gulp.task('default', function(){

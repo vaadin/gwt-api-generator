@@ -26,7 +26,7 @@
   </organization>
   <url><%= pkg.org.url %></url>
  <% } %>
- <% if (pkg.org) { %>
+ <% if (pkg.scm) { %>
   <scm>
     <connection><%= pkg.scm.connection %></connection>
     <developerConnection><%= pkg.scm.developerConnection %></developerConnection>

@@ -207,6 +207,8 @@ gulp.task('copy:pom', function() {
   var pkgFile = globalVar.currentDir + 'package.json';
   var pkgContent = fs.readFileSync(pkgFile);
   globalVar.pkg = pkgContent ? JSON.parse(pkgContent) : {};
+  globalVar.pkg.version = args.version || globalVar.pkg.version;
+  globalVar.pkg.version += globalVar.pkg.release || '';
 
   fs.ensureFileSync(pom);
   fs.writeFileSync(pom, new Buffer(tpl(_.merge({}, null, globalVar, helpers))));

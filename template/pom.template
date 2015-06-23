@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <modelVersion>4.0.0</modelVersion>
- <% if (hasPomParent) { %>
   <parent>
-    <relativePath>./pom-parent.xml</relativePath>
-    <groupId><%= ns %></groupId>
-    <artifactId><%= artifactId %>-parent</artifactId>
-    <version><%= version %></version>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>4</version>
   </parent>
- <% } else { %>
+
+  <modelVersion>4.0.0</modelVersion>
   <groupId><%= ns %></groupId>
   <version><%= version %></version>
- <% } %>
   <artifactId><%= artifactId %></artifactId>
+  <name><%= pkg.name || artifactId %></name>
+  <description><%= pkg.description || artifactId %></description>
+ <% if (pkg.license) { %>
+  <licenses>
+    <license>
+      <name><%= pkg.license %></name>
+    </license>
+  </licenses>
+ <% } %>
+ <% if (pkg.org) { %>
+  <organization>
+    <name><%= pkg.org.name %></name>
+    <url><%= pkg.org.url %></url>
+  </organization>
+  <url><%= pkg.org.url %></url>
+ <% } %>
+ <% if (pkg.org) { %>
+  <scm>
+    <connection><%= pkg.scm.connection %></connection>
+    <developerConnection><%= pkg.scm.developerConnection %></developerConnection>
+    <url><%= pkg.scm.url %></url>
+  </scm>
+ <% } %>
+  <developers>
+    <developer>
+      <id><%= pkg.author %></id>
+      <name><%= pkg.author %></name>
+    </developer>
+  </developers>
+
 
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>

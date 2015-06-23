@@ -5,14 +5,14 @@
   <parent>
     <relativePath>./pom-parent.xml</relativePath>
     <groupId><%= ns %></groupId>
-    <artifactId><%= artifactId %></artifactId>
+    <artifactId><%= artifactId %>-parent</artifactId>
     <version><%= version %></version>
   </parent>
  <% } else { %>
   <groupId><%= ns %></groupId>
-  <artifactId><%= artifactId %></artifactId>
   <version><%= version %></version>
  <% } %>
+  <artifactId><%= artifactId %></artifactId>
 
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>

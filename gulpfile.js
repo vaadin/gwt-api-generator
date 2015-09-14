@@ -37,7 +37,7 @@ gulp.task('clean:resources', function() {
 gulp.task('clean', ['clean:target', 'clean:resources']);
 
 gulp.task('bower:install', ['clean'], function() {
-  return bower({ cmd: 'install', cwd: globalVar.publicDir}, [globalVar.bowerPackages]);
+  return bower({ cmd: 'install', directory: globalVar.bowerDirCwd, cwd: globalVar.publicDir}, [globalVar.bowerPackages]);
 });
 
 gulp.task('parse', ['analyze'], function(cb) {

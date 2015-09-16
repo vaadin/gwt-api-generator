@@ -9,6 +9,7 @@ var publicDirBase = currentDir + (args.resourcesDir || 'src/main/resources/').re
 
 var clientDir = clientDirBase + '/' + nspath + "/";
 var publicDir = publicDirBase + '/' + nspath + "/public/";
+var bowerDirName = "bower_components";
 
 module.exports = {
   ns: ns,
@@ -19,7 +20,8 @@ module.exports = {
   publicDirBase: publicDirBase,
   clientDir: clientDir,
   publicDir: publicDir,
-  bowerDir: publicDir + "bower_components/",
+  bowerDirCwd: "./" + bowerDirName,
+  bowerDir: publicDir + bowerDirName + "/",
   bowerPackages: (args.package || 'PolymerElements/paper-elements').split(/[, ]+/)
 };
 

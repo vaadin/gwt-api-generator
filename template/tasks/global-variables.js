@@ -21,7 +21,7 @@ module.exports = {
   clientDir: clientDir,
   publicDir: publicDir,
   bowerDirCwd: "./" + bowerDirName,
-  bowerDir: publicDir + +bowerDirName + "/",
+  bowerDir: publicDir + bowerDirName + "/",
   bowerPackages: (args.package || 'PolymerElements/paper-elements').split(/[, ]+/)
 };
 

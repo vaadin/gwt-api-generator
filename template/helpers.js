@@ -13,7 +13,16 @@ module.exports = {
   javaKeywords: ['for', 'switch'], // TODO: if it's necessary add other keywords as well
   findBehavior: function(name) {
     for (var i = 0; name && i < global.parsed.length; i++) {
-      if (this.className(global.parsed[i].is) == this.className(name)) {
+      var item = global.parsed[i];
+      if (this.isBehavior(item) && this.className(item.is) == this.className(name)) {
+        return global.parsed[i];
+      }
+    }
+  },
+  findElement: function(name) {
+    for (var i = 0; name && i < global.parsed.length; i++) {
+      var item = global.parsed[i];
+      if (!this.isBehavior(item) && this.className(item.is) == this.className(name)) {
         return global.parsed[i];
       }
     }
@@ -104,10 +113,11 @@ module.exports = {
     if (/^element/i.test(t)) return 'Element';
     if (/^number/i.test(t)) return 'double';
     if (/^function/i.test(t)) return 'Function';
-    var b = this.findBehavior(t);
-    if (b) {
-      var c = this.camelCase(t);
-      return c != t ? c + 'Element' : c;
+    if (this.findBehavior(t)) {
+      return this.camelCase(t);
+    }
+    if (this.findElement(t)) {
+      return this.camelCase(t) + 'Element';
     }
 
     return "JavaScriptObject";

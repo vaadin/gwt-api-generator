@@ -440,7 +440,7 @@ public abstract class Polymer {
         function loadPolyfill() {
             var s = $doc.createElement('script');
             s.src = @com.vaadin.polymer.Polymer::absoluteHref(*)
-                        (@com.vaadin.polymer.Polymer::getWebcomponentsJsLocation()());
+                        ($wnd.webcomponentsJsLocation);
             s.onreadystatechange = s.onload = done;
             $doc.head.appendChild(s);
         }

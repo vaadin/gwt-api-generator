@@ -269,6 +269,8 @@ public abstract class Polymer {
                     pending.add(ok);
                 }
                 return;
+            } else {
+                Base.importHref(href, done, err);
             }
             urlImported.add(href);
         }

@@ -346,7 +346,7 @@ public abstract class Polymer {
     }
 
     public static <T> void ensureCustomElement(final T elem, String... imports) {
-        if (isRegisteredElement(elem)) {
+        if (isRegisteredElement(elem) && urlImported.containsAll(Arrays.asList(imports))) {
             return;
         }
 

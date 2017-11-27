@@ -43,6 +43,14 @@ public abstract class Polymer {
     @JsProperty(namespace = JsPackage.GLOBAL)
     public static native String getGwtBowerLocation();
 
+    /**
+     * Set path to webcomponents.js - default webcomponentsjs/webcomponents-lite.min.js
+     */
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static native void setWebcomponentsJsLocation(String s);
+
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static native String getWebcomponentsJsLocation();
 
     static {
         if (getGwtBowerLocation() == null) {
@@ -53,6 +61,9 @@ public abstract class Polymer {
                 moduleBase = moduleName + "/";
             }
             setGwtBowerLocation(moduleBase + "bower_components/");
+        }
+        if(getWebcomponentsJsLocation() == null) {
+            setWebcomponentsJsLocation("webcomponentsjs/webcomponents-lite.min.js");
         }
     }
 
@@ -429,7 +440,7 @@ public abstract class Polymer {
         function loadPolyfill() {
             var s = $doc.createElement('script');
             s.src = @com.vaadin.polymer.Polymer::absoluteHref(*)
-                        ('webcomponentsjs/webcomponents-lite.min.js');
+                        (@com.vaadin.polymer.Polymer::getWebcomponentsJsLocation()());
             s.onreadystatechange = s.onload = done;
             $doc.head.appendChild(s);
         }

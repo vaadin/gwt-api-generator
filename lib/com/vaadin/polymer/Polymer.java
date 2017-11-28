@@ -11,6 +11,7 @@ import com.vaadin.polymer.PolymerFunction;
 import elemental2.dom.HTMLElement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -43,6 +44,14 @@ public abstract class Polymer {
     @JsProperty(namespace = JsPackage.GLOBAL)
     public static native String getGwtBowerLocation();
 
+    /**
+     * Set path to webcomponents.js - default webcomponentsjs/webcomponents-lite.min.js
+     */
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static native void setWebcomponentsJsLocation(String s);
+
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static native String getWebcomponentsJsLocation();
 
     static {
         if (getGwtBowerLocation() == null) {
@@ -53,6 +62,9 @@ public abstract class Polymer {
                 moduleBase = moduleName + "/";
             }
             setGwtBowerLocation(moduleBase + "bower_components/");
+        }
+        if(getWebcomponentsJsLocation() == null) {
+            setWebcomponentsJsLocation("webcomponentsjs/webcomponents-lite.min.js");
         }
     }
 
@@ -269,6 +281,8 @@ public abstract class Polymer {
                     pending.add(ok);
                 }
                 return;
+            } else {
+                Base.importHref(href, done, err);
             }
             urlImported.add(href);
         }
@@ -333,7 +347,7 @@ public abstract class Polymer {
     }
 
     public static <T> void ensureCustomElement(final T elem, String... imports) {
-        if (isRegisteredElement(elem)) {
+        if (isRegisteredElement(elem) && urlImported.containsAll(Arrays.asList(imports))) {
             return;
         }
 
@@ -427,7 +441,7 @@ public abstract class Polymer {
         function loadPolyfill() {
             var s = $doc.createElement('script');
             s.src = @com.vaadin.polymer.Polymer::absoluteHref(*)
-                        ('webcomponentsjs/webcomponents-lite.min.js');
+                        ($wnd.webcomponentsJsLocation);
             s.onreadystatechange = s.onload = done;
             $doc.head.appendChild(s);
         }

@@ -61,7 +61,7 @@ in a GWT application.
 
 Build script, demo and usage instructions for the project are available [here](https://github.com/vaadin/gwt-polymer-elements).
 
-You also might see all these components in action using the [Show Case](http://vaadin.github.io/gwt-polymer-elements/demo/) application
+You also might see all these components in action using the [Show Case](http://manolo.github.io/gwt-polymer-elements/demo/) application
 
 ## Using your own Web Components in your App.
 

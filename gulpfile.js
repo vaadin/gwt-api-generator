@@ -41,6 +41,7 @@ gulp.task('bower:configure', ['clean:resources'], function(done) {
   jsonfile.readFile('.bowerrc', function (err, obj) {
     if (!err) {
       fs.copySync('.bowerrc', globalVar.publicDir + '/.bowerrc');
+      fs.copySync('bower.json', globalVar.publicDir + '/bower.json');
       if(obj.directory) {
         globalVar.bowerDir = globalVar.publicDir + '/' + obj.directory + '/';
       }
